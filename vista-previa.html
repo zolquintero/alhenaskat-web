@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alhena Skat Group — Vista previa</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Libre+Baskerville:wght@400&family=Alice&display=swap" rel="stylesheet">
+<style>
+/* VOICE: institucional, sobria, a la altura de una agencia de inversión.
+   IDEA: la carpeta de una firma del corredor: portada, servicios, sectores y un archivo vivo de Perspectivas.
+   PICTURE: tipografía y bandas azul marino; espacios marcados para fotos propias.
+   COLOUR and TYPE: un solo azul marino continuo #1E264C con blanco; pie azul; gris como color secundario. Títulos en serif (a elegir), texto en Montserrat.
+   LAYOUT: menú fijo (Servicios · Sectores · Perspectivas · Nosotros · Contacto), páginas por ancla. */
+:root,:root[data-theme=light],:root[data-theme=dark]{color-scheme:light;--navy:#1E264C;--white:#FFFFFF;--ink:#000000;--line:rgba(30,38,76,.16);--soft:rgba(0,0,0,.72);--wash:rgba(30,38,76,.05)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:90px}
+body{margin:0;background:var(--white);color:var(--ink);font:400 16px/1.7 Montserrat,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-weight:500;line-height:1.2;text-wrap:balance;margin:0;color:var(--navy)}
+p{margin:0}a{color:var(--navy)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 max(5vw,20px)}
+.band{padding:clamp(56px,8vw,104px) 0}
+.navy{background:var(--navy);color:var(--white)}
+.navy h1,.navy h2,.navy h3,.navy a{color:var(--white)}
+.navy p{color:rgba(255,255,255,.86)}
+.wash{background:var(--wash)}
+.preview{background:var(--ink);color:var(--white);font-size:12px;letter-spacing:.04em;text-align:center;padding:7px 16px}
+header{position:sticky;top:0;z-index:5;background:var(--white);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:84px}
+.logo{display:inline-flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:var(--navy)}
+.logo span{font:300 10px/1 Montserrat,sans-serif;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+nav{display:flex;align-items:center;gap:26px}
+nav a{text-decoration:none;font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent;color:var(--ink)}
+nav a.cur{border-color:var(--navy);color:var(--navy)}
+.langs{font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--soft)}
+.langs b{color:var(--navy)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;background:var(--navy);color:var(--white)!important;text-decoration:none;font:500 14px Montserrat,sans-serif;letter-spacing:.03em;border:0;cursor:pointer;border-bottom:0!important}
+.btn.ghost{background:transparent;color:var(--navy)!important;border:1px solid var(--navy)!important}
+.navy .btn{background:var(--white);color:var(--navy)!important}
+.navy .btn.ghost{background:transparent;color:var(--white)!important;border-color:var(--white)!important}
+.menu{display:none;background:none;border:0;width:44px;height:44px;color:var(--ink);cursor:pointer}
+:focus-visible{outline:2px solid var(--navy);outline-offset:3px}.navy :focus-visible{outline-color:var(--white)}
+.page{display:none}.page.on{display:block}
+.eb{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:16px}
+.navy .eb{color:var(--white)}
+.h1{font-size:clamp(30px,4.2vw,50px);font-weight:400}
+.h2{font-size:clamp(24px,2.8vw,34px);margin-bottom:18px}
+.lead{max-width:720px;color:var(--soft);font-size:17px}
+.navy .lead{color:rgba(255,255,255,.86)}
+.hero{padding:clamp(72px,10vw,136px) 0}
+.hero p{margin-top:26px;max-width:700px;font-size:clamp(16px,1.4vw,18px)}
+.row{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.path{border:1px solid var(--line);padding:30px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--ink);transition:border-color .2s}
+.path:hover{border-color:var(--navy)}
+.path h3{font-size:19px}
+.path p{color:var(--soft);font-size:15px}
+.path span{margin-top:auto;font-size:14px;font-weight:600;color:var(--navy)}
+.svc{border-top:2px solid var(--navy);padding-top:22px}
+.svc h3{font-size:18px;font-weight:600;margin-bottom:10px}
+.svc p{font-size:15px;color:var(--soft)}
+.svc ul{margin:12px 0 0;padding-left:18px;font-size:14px;color:var(--soft)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;counter-reset:s}
+.steps div{border-top:1px solid rgba(255,255,255,.5);padding-top:20px}
+.steps small{font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.steps h3{font-size:20px;margin:6px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 36px}
+.chip{font:500 13px Montserrat,sans-serif;padding:0 16px;min-height:40px;border:1px solid var(--navy);background:var(--white);color:var(--navy);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--navy);color:var(--white)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.card{border:1px solid var(--line);display:flex;flex-direction:column;background:var(--white)}
+.card .ph{aspect-ratio:16/9}
+.card .body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
+.tag{font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+.ex{font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--ink);padding:2px 8px}
+.card h3{font-size:17px;font-weight:600;line-height:1.35}
+.card p{font-size:14px;color:var(--soft)}
+.card a.more{margin-top:auto;font-size:14px;font-weight:600;text-decoration:none}
+.ph{background:var(--wash);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--soft);font-size:13px;padding:14px}
+.sect{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sect div{background:var(--white);padding:28px}
+.sect h3{font-size:17px;font-weight:600;margin-bottom:8px}
+.sect p{font-size:14px;color:var(--soft)}
+.news{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+.news form{display:flex;flex-wrap:wrap;gap:10px;flex:1 1 380px;max-width:520px}
+input,select,textarea{font:400 16px Montserrat,sans-serif;color:var(--ink);background:var(--white);border:1px solid rgba(30,38,76,.4);padding:11px 12px;min-height:46px;width:100%}
+.news input{flex:1 1 220px;width:auto}
+textarea{min-height:130px;resize:vertical}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500}
+.cform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.full{grid-column:1/-1}
+.note{font-size:13px;color:var(--soft);min-height:1.4em}
+.navy .note{color:rgba(255,255,255,.8)}
+.article{max-width:760px}
+.article h2{font-size:clamp(26px,3vw,36px);margin:10px 0 18px}
+.article h3{font-size:18px;font-weight:600;margin:30px 0 10px}
+.article p,.article li{color:var(--soft)}
+.article ul{padding-left:20px}
+.ctry{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.ctry a{border:1px solid var(--line);padding:22px;text-decoration:none;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.ctry a:hover{border-color:var(--navy)}
+.ctry b{font-size:17px;font-weight:600;color:var(--navy)}
+.ctry small{font-size:12px;color:var(--soft)}
+.kv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:18px 0 8px}
+.kv div{background:var(--white);padding:18px}
+.kv small{display:block;font-size:12px;color:var(--soft)}
+.kv b{font-size:18px;font-weight:600;color:var(--navy)}
+.about{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:start}
+.values{display:grid;gap:18px}
+.values div{border-left:2px solid var(--navy);padding-left:16px}
+.values h3{font-size:16px;font-weight:600}
+.values p{font-size:14px;color:var(--soft)}
+footer{background:var(--navy);color:var(--white);padding:56px 0 36px;font-size:14px}
+footer a{color:var(--white);text-decoration:none}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot h3{color:var(--white);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.copy{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.4);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:12px}
+@media(max-width:900px){
+  .menu{display:inline-flex;align-items:center;justify-content:center}
+  nav{display:none;position:absolute;top:84px;left:0;right:0;background:var(--white);flex-direction:column;align-items:stretch;gap:0;padding:8px max(5vw,20px) 20px;border-bottom:1px solid var(--line)}
+  nav.open{display:flex}nav a{padding:12px 0}
+  .grid3,.cards,.sect,.steps,.foot,.ctry,.kv{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:600px){.grid3,.grid2,.cards,.sect,.steps,.foot,.cform{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- Tema oscuro continuo (v2) ---- */
+:root{--hf:"Cormorant Garamond",Georgia,serif}
+body{background:var(--navy);color:var(--white);font-weight:300}
+h1,h2,h3{color:var(--white);font-family:var(--hf);font-weight:500;letter-spacing:.005em}
+.h1{font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.08}
+.h2{font-size:clamp(28px,3.2vw,42px);font-weight:400}
+.svc h3,.card h3,.sect h3,.values h3,.path h3,.article h3{font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:0}
+a{color:var(--white)}
+header{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.1)}
+.logo{color:var(--white)}
+nav a{color:rgba(255,255,255,.78);font-weight:400}
+nav a:hover{color:var(--white)}
+nav a.cur{border-color:var(--white);color:var(--white)}
+.langs{color:rgba(255,255,255,.55)}.langs b{color:var(--white)}
+.menu{color:var(--white)}
+.btn,.navy .btn{background:var(--white);color:var(--navy)!important;border-radius:999px;padding:0 26px}
+.btn.ghost,.navy .btn.ghost{background:transparent;color:var(--white)!important;border:1px solid rgba(255,255,255,.55)!important}
+.btn:hover{opacity:.88}
+.navy{background:transparent}
+.band{border-top:1px solid rgba(255,255,255,.08)}
+.hero{min-height:calc(88vh - 84px);display:flex;align-items:center;border-top:0}
+.hero>.wrap{width:100%}
+.wash{background:rgba(0,0,0,.22)}
+.eb,.navy .eb{color:rgba(255,255,255,.62)}
+.lead,.navy .lead,.navy p,.path p,.svc p,.svc ul,.card p,.sect p,.values p,.article p,.article li,.meta,.ctry small,.kv small,.note{color:rgba(255,255,255,.74)!important}
+.path,.card,.ctry a{border:1px solid rgba(255,255,255,.16);background:transparent;color:var(--white)}
+.path:hover,.ctry a:hover,.card:hover{border-color:rgba(255,255,255,.6)}
+.path span,.tag,.card a.more,.ctry b,.kv b{color:var(--white)}
+.svc{border-top:1px solid rgba(255,255,255,.4)}
+.steps div{border-top:1px solid rgba(255,255,255,.4)}
+.sect,.kv{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.14)}
+.sect div,.kv div{background:var(--navy)}
+.chip{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.5);border-radius:999px}
+.chip[aria-pressed=true]{background:var(--white);color:var(--navy)}
+.ex{background:var(--white);color:var(--navy)}
+.ph{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.22);color:rgba(255,255,255,.6)}
+input,select,textarea{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.35);border-radius:4px}
+select option{color:var(--ink)}
+.values div{border-left:1px solid rgba(255,255,255,.5)}
+.contact-panel{border:1px solid rgba(255,255,255,.16)}
+:focus-visible,.navy :focus-visible{outline-color:var(--white)}
+footer{background:var(--ink)}
+.preview{position:fixed;left:16px;bottom:16px;z-index:20;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;max-width:calc(100% - 32px);background:var(--ink);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:10px 14px;font-size:12px;text-align:left}
+.fopts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fopts button{font:500 12px Montserrat,sans-serif;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:4px 10px;min-height:30px;cursor:pointer}
+.fopts button[aria-pressed=true]{background:var(--white);color:var(--ink)}
+@media(max-width:900px){nav{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.1)}}
+
+/* ---- Flujo tipo Looka (v3) ---- */
+.hero{min-height:calc(92vh - 84px)}
+.h1.big{font-size:clamp(40px,6vw,84px);line-height:1.06;max-width:1050px}
+.photo{margin:0;position:relative;background:var(--ph);overflow:hidden}
+.photo.wide{height:clamp(320px,52vw,640px);margin:0 max(5vw,20px)}
+.photo.tall{aspect-ratio:4/5;width:100%}
+.photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;font-size:12px;letter-spacing:.03em;color:rgba(255,255,255,.85);background:linear-gradient(0deg,rgba(0,0,0,.55),transparent)}
+.photo figcaption b{color:#fff;font-weight:600}
+.photo::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.10),transparent 60%)}
+@media(prefers-reduced-motion:no-preference){.photo::before{animation:drift 14s ease-in-out infinite alternate}@keyframes drift{to{transform:translateX(-8%) scale(1.08)}}}
+.split2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.split2.rev{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.intro{font-size:clamp(19px,1.8vw,24px);line-height:1.6;color:rgba(255,255,255,.88)!important;font-weight:300}
+.statement{background:var(--white);color:var(--ink);padding:clamp(80px,11vw,150px) 0;text-align:center}
+.statement h2{color:var(--navy);font-size:clamp(30px,4vw,54px);font-weight:400;max-width:1000px;margin:0 auto;line-height:1.15}
+.btn.dark{background:var(--navy);color:var(--white)!important}
+.svcrows{border-top:1px solid rgba(255,255,255,.18)}
+.svcrow{display:grid;grid-template-columns:70px minmax(0,1fr) 40px;align-items:center;gap:16px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,.18);text-decoration:none;color:var(--white)}
+.svcrow h3{font-family:var(--hf)!important;font-weight:400!important;font-size:clamp(24px,3vw,40px);line-height:1.15}
+.svcrow .n{font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,.55)}
+.svcrow .go{font-size:28px;text-align:right;transition:transform .2s}
+.svcrow:hover .go{transform:translateX(6px)}
+.paths{display:grid;border-top:1px solid rgba(255,255,255,.18)}
+.pathrow{display:block;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.18);text-decoration:none}
+.pathrow h3{font-family:var(--hf)!important;font-weight:400!important;font-size:clamp(24px,2.6vw,34px);margin-bottom:6px}
+.pathrow p{color:rgba(255,255,255,.72)}
+.final{padding:clamp(90px,12vw,170px) 0;text-align:center;border-top:1px solid rgba(255,255,255,.08)}
+.final h2{font-size:clamp(32px,4.4vw,60px);font-weight:400;max-width:1050px;margin:0 auto;line-height:1.12}
+@media(max-width:900px){.split2,.split2.rev{grid-template-columns:minmax(0,1fr)}.photo.tall{aspect-ratio:4/3}.svcrow{grid-template-columns:44px minmax(0,1fr) 24px}}
+
+/* ---- Paleta azul, gris y blanco + encabezado sin línea (v3b) ---- */
+:root{--gray:#ECEDF0;--gray-ink:#5B5F6B}
+header{border-bottom:0;transition:box-shadow .25s}
+header.scrolled{box-shadow:0 1px 0 rgba(255,255,255,.14),0 10px 24px rgba(0,0,0,.28)}
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.14)}
+.preview{background:var(--gray-ink);border-color:rgba(255,255,255,.3)}
+.fopts button[aria-pressed=true]{color:var(--gray-ink)}
+.wash{background:var(--gray);color:var(--navy)}
+.wash h2,.wash h3,.wash .eb{color:var(--navy)!important}
+.wash .lead,.wash .note{color:var(--gray-ink)!important}
+.wash label{color:var(--navy)}
+.wash input{color:var(--navy);border-color:rgba(30,38,76,.4);background:var(--white)}
+.wash .btn{background:var(--navy);color:var(--white)!important}
+.statement{background:var(--gray)}
+
+.photo.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo.img::before{z-index:1;background:linear-gradient(0deg,rgba(30,38,76,.35),transparent 40%)}
+.photo.img figcaption{z-index:2;font-size:11px;color:rgba(255,255,255,.75)}
+@media(prefers-reduced-motion:no-preference){.photo.img img{animation:kb 22s ease-in-out infinite alternate}@keyframes kb{to{transform:scale(1.07)}}.photo.img::before{animation:none}}
+</style>
+</head>
+<body>
+<div class="preview" role="group" aria-label="Opciones de la vista previa"><span>Vista previa · «Ejemplo» = guía de formato</span><span class="fopts">Títulos: <button type="button" data-f="cg" aria-pressed="true">Cormorant Garamond</button><button type="button" data-f="lb" aria-pressed="false">Libre Baskerville</button><button type="button" data-f="al" aria-pressed="false">Alice (Looka)</button><button type="button" data-f="ms" aria-pressed="false">Montserrat</button></span></div>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#inicio" aria-label="Alhena Skat Group, inicio">
+      <svg width="38" height="38" viewBox="-2 -2 104 104" aria-hidden="true"><path d="M0 100 L50 0 L100 100 L80 100 L40 20 M20 60 H60" fill="none" stroke="currentColor" stroke-width="3.2"/></svg>
+      <span>Alhena Skat Group</span>
+    </a>
+    <button class="menu" id="menu" aria-label="Abrir menú" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    <nav id="nav" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#sectores">Sectores</a>
+      <a href="#perspectivas">Perspectivas</a>
+      <a href="#nosotros">Nosotros</a>
+      <span class="langs"><b>ES</b> · EN · FR</span>
+      <a class="btn" href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- INICIO -->
+<section class="page" id="p-inicio" aria-label="Inicio">
+  <div class="hero"><div class="wrap">
+    <h1 class="h1 big">Conectamos empresas e instituciones con oportunidades de negocio e inversión en el corredor Canadá–América Latina.</h1>
+  </div></div>
+
+  <figure class="photo wide img"><img src="https://images.unsplash.com/photo-1744948970154-ba29775456bf?auto=format&fit=crop&w=2400&q=80" alt="" loading="lazy"><figcaption>Ciudad de Panamá · Foto: Christian Moncada, Unsplash</figcaption></figure>
+
+  <div class="band"><div class="wrap split2">
+    <div>
+      <p class="intro">Somos una firma de desarrollo de negocios y relaciones institucionales con base en Panamá. Identificamos socios, establecemos contacto con quienes toman las decisiones, estructuramos alianzas y acompañamos las negociaciones hasta que las oportunidades se convierten en acuerdos y proyectos concretos.</p>
+      <div class="row"><a class="btn" href="#servicios">Nuestros servicios</a></div>
+    </div>
+    <figure class="photo tall img"><img src="https://images.unsplash.com/photo-1758518727613-00192aed759b?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy"><figcaption>Foto: Unsplash</figcaption></figure>
+  </div></div>
+
+  <div class="statement"><div class="wrap">
+    <h2>Del primer contacto al acuerdo firmado: un solo interlocutor para entrar, crecer y asociarse en el corredor.</h2>
+    <div class="row" style="justify-content:center"><a class="btn dark" href="#contacto">Hablemos de su proyecto</a></div>
+  </div></div>
+
+  <figure class="photo wide img"><img src="https://images.unsplash.com/photo-1645932691293-7befeb2d4d07?auto=format&fit=crop&w=2400&q=80" alt="" loading="lazy"><figcaption>Canal de Panamá · Foto: Brian J. Tromp, Unsplash</figcaption></figure>
+
+  <div class="band"><div class="wrap">
+    <p class="eb">Servicios</p>
+    <div class="svcrows">
+      <a class="svcrow" href="#servicios"><span class="n">01</span><h3>Entrada a mercados y expansión</h3><span class="go">›</span></a>
+      <a class="svcrow" href="#servicios"><span class="n">02</span><h3>Alianzas y desarrollo de negocios</h3><span class="go">›</span></a>
+      <a class="svcrow" href="#servicios"><span class="n">03</span><h3>Relaciones institucionales y proyectos público-privados</h3><span class="go">›</span></a>
+      <a class="svcrow" href="#servicios-instituciones"><span class="n">04</span><h3>Misiones comerciales y atracción de inversión</h3><span class="go">›</span></a>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap split2 rev">
+    <figure class="photo tall img"><img src="https://images.unsplash.com/photo-1587127457386-1ab504456133?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy"><figcaption>Montreal · Foto: Unsplash</figcaption></figure>
+    <div>
+      <p class="eb">¿Cómo podemos ayudarle?</p>
+      <div class="paths">
+        <a class="pathrow" href="#servicios"><h3>Soy una empresa</h3><p>Quiero entrar a un nuevo mercado, encontrar socios o vender a nuevos clientes.</p></a>
+        <a class="pathrow" href="#servicios"><h3>Soy un inversionista</h3><p>Evalúo una oportunidad y necesito contexto, contrapartes confiables y acompañamiento.</p></a>
+        <a class="pathrow" href="#servicios-instituciones"><h3>Soy una institución</h3><p>Busco misiones, agendas o aliados al otro lado del corredor.</p></a>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px">
+      <div><p class="eb">Perspectivas</p><h2 class="h2" style="margin:0">Lo más reciente</h2></div>
+      <a class="btn ghost" href="#perspectivas">Ver todas</a>
+    </div>
+    <div class="cards" id="latest"></div>
+  </div></div>
+
+  <div class="final"><div class="wrap">
+    <h2>¿Evalúa entrar a un nuevo mercado? Conversemos sobre la decisión que necesita tomar.</h2>
+    <div class="row" style="justify-content:center"><a class="btn" href="#contacto">Contacto</a></div>
+  </div></div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="page" id="p-servicios" aria-label="Servicios">
+  <div class="navy band"><div class="wrap">
+    <p class="eb">Servicios</p>
+    <h1 class="h1">De la estrategia a la ejecución, en un solo mandato</h1>
+    <p class="lead" style="margin-top:20px">Trabajamos para empresas, inversionistas e instituciones. Usted tiene un solo interlocutor; nosotros coordinamos a cada actor del proyecto.</p>
+  </div></div>
+  <div class="band"><div class="wrap">
+    <p class="eb">Para empresas e inversionistas</p>
+    <div class="grid3" style="margin-top:20px">
+      <div class="svc"><h3>Entrada a mercados y expansión</h3><p>Lectura del mercado, mapa de actores y una ruta de entrada por etapas.</p><ul><li>Estudio de mercado y competencia</li><li>Selección de mercado y modalidad de entrada</li><li>Plan de entrada por fases</li></ul></div>
+      <div class="svc"><h3>Alianzas y desarrollo de negocios</h3><p>Socios adecuados, colaboración estructurada y negociaciones acompañadas.</p><ul><li>Búsqueda y verificación de socios y distribuidores</li><li>Agendas de reuniones B2B</li><li>Acompañamiento en negociaciones</li></ul></div>
+      <div class="svc"><h3>Relaciones institucionales y proyectos público-privados</h3><p>Articulación con instituciones, cámaras y gremios, con el proceso que corresponde.</p><ul><li>Mapa de actores públicos y privados</li><li>Agendas institucionales</li><li>Acompañamiento de iniciativas público-privadas</li></ul></div>
+    </div>
+  </div></div>
+  <div class="wash band" id="servicios-instituciones"><div class="wrap">
+    <p class="eb">Para instituciones</p>
+    <h2 class="h2">Agencias, cámaras y gremios</h2>
+    <div class="grid3" style="margin-top:20px">
+      <div class="svc"><h3>Misiones comerciales</h3><p>Diseño y coordinación de misiones de salida y de recepción, con agendas de reuniones calificadas.</p></div>
+      <div class="svc"><h3>Atracción de inversión</h3><p>Identificación y acercamiento a inversionistas y empresas con interés real en su mercado.</p></div>
+      <div class="svc"><h3>Foros y ponentes</h3><p>Vinculación de ponentes, delegaciones y aliados para foros y conferencias internacionales.</p></div>
+    </div>
+    <div class="row"><a class="btn" href="#contacto">Hablemos de su proyecto</a></div>
+  </div></div>
+</section>
+
+<!-- SECTORES -->
+<section class="page" id="p-sectores" aria-label="Sectores">
+  <div class="navy band"><div class="wrap">
+    <p class="eb">Sectores</p>
+    <h1 class="h1">Sectores en los que trabajamos</h1>
+    <p class="lead" style="margin-top:20px">Experiencia en industrias donde el corredor Canadá–América Latina tiene oportunidades concretas.</p>
+  </div></div>
+  <div class="band"><div class="wrap">
+    <div class="sect">
+      <div><h3>Logística y comercio</h3><p>Distribución regional, zonas francas y cadenas de suministro.</p></div>
+      <div><h3>Salud</h3><p>Proveedores, laboratorios y servicios para el sector público y privado.</p></div>
+      <div><h3>Alimentos y agroindustria</h3><p>Maquila, marcas propias y acceso a nuevos canales.</p></div>
+      <div><h3>Seguridad e industria</h3><p>Tecnología industrial y soluciones para gobiernos y empresas.</p></div>
+      <div><h3>Minería y energía</h3><p>Proveedores, servicios y proyectos en la región.</p></div>
+      <div><h3>Tecnología y servicios financieros</h3><p>Datos, fintech y servicios profesionales.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- PERSPECTIVAS -->
+<section class="page" id="p-perspectivas" aria-label="Perspectivas">
+  <div class="navy band"><div class="wrap">
+    <p class="eb">Perspectivas</p>
+    <h1 class="h1">Análisis, misiones, eventos y alianzas del corredor</h1>
+    <p class="lead" style="margin-top:20px">Lo que está pasando en el comercio y la inversión entre Canadá y América Latina, y lo que significa para su empresa.</p>
+  </div></div>
+  <div class="band" style="padding-bottom:0"><div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px;margin-bottom:22px">
+      <div><p class="eb">Fichas país</p><h2 class="h2" style="margin:0">Consulte un mercado</h2></div>
+      <p class="meta"><span class="ex">Ejemplo</span><span>Países por confirmar</span></p>
+    </div>
+    <div class="ctry">
+      <a href="#ficha"><b>Panamá</b><small>Actualizada: [fecha] · PDF</small></a>
+      <a href="#ficha"><b>Ecuador</b><small>Actualizada: [fecha] · PDF</small></a>
+      <a href="#ficha"><b>Colombia</b><small>Actualizada: [fecha] · PDF</small></a>
+      <a href="#ficha"><b>Canadá</b><small>Para empresas latinoamericanas · PDF</small></a>
+    </div>
+  </div></div>
+  <div class="band"><div class="wrap">
+    <p class="eb">Publicaciones</p>
+    <div class="chips" role="group" aria-label="Filtrar publicaciones" id="chips"></div>
+    <div class="cards" id="all"></div>
+  </div></div>
+  <div class="wash band"><div class="wrap news">
+    <div><h2 class="h2" style="margin:0">Reciba el resumen mensual</h2><p class="lead" style="margin-top:10px">Una vez al mes, en su correo.</p></div>
+    <form class="nl"><label style="flex:1 1 240px">Correo electrónico<input type="email" name="correo" autocomplete="email"></label><button class="btn" type="submit" style="align-self:end">Suscribirme</button><p class="note" role="status" style="flex-basis:100%"></p></form>
+  </div></div>
+</section>
+
+<!-- ARTÍCULO DE EJEMPLO -->
+<section class="page" id="p-articulo" aria-label="Publicación de ejemplo">
+  <div class="band"><div class="wrap article">
+    <p class="meta"><span class="ex">Ejemplo</span><span class="tag">Análisis</span><span>Plantilla de formato</span></p>
+    <h2>Título de la publicación: una idea clara en una sola frase</h2>
+    <p><strong>Resumen.</strong> Dos o tres líneas con la noticia o el hecho, y por qué importa a las empresas del corredor.</p>
+    <h3>Qué pasó</h3>
+    <p>Los hechos, resumidos con nuestras palabras y con la fuente citada al final.</p>
+    <h3>Qué significa para su empresa</h3>
+    <ul><li>Implicación concreta para una empresa canadiense en América Latina.</li><li>Implicación concreta para una empresa latinoamericana que mira a Canadá.</li></ul>
+    <h3>Nuestra lectura</h3>
+    <p>La opinión de Alhena Skat Group: qué vigilar y qué decisión conviene preparar.</p>
+    <h3>Fuentes</h3>
+    <p>Enlaces a las fuentes originales.</p>
+    <div class="row"><a class="btn ghost" href="#perspectivas">‹ Volver a Perspectivas</a><a class="btn" href="#contacto">Hablemos</a></div>
+  </div></div>
+</section>
+
+<!-- FICHA PAÍS DE EJEMPLO -->
+<section class="page" id="p-ficha" aria-label="Ficha país de ejemplo">
+  <div class="navy band"><div class="wrap">
+    <p class="meta"><span class="ex" style="background:var(--white);color:var(--ink)">Ejemplo</span><span class="tag" style="color:var(--white)">Ficha país</span></p>
+    <h1 class="h1" style="margin-top:12px">Panamá</h1>
+    <p class="lead" style="margin-top:14px">Lo esencial para una empresa canadiense que evalúa el mercado panameño. Actualizada: [fecha].</p>
+    <div class="row"><a class="btn" href="#ficha" onclick="return false">Descargar PDF</a><a class="btn ghost" href="#contacto">Hablar con nosotros</a></div>
+  </div></div>
+  <div class="band"><div class="wrap article" style="max-width:960px">
+    <h3 style="margin-top:0">Datos clave</h3>
+    <div class="kv"><div><small>Población</small><b>[dato]</b></div><div><small>PIB</small><b>[dato]</b></div><div><small>Moneda</small><b>[dato]</b></div><div><small>Comercio con Canadá</small><b>[dato]</b></div></div>
+    <p style="font-size:13px">Cada dato con su fuente oficial y su fecha.</p>
+    <h3>Marco comercial con Canadá</h3>
+    <p>Acuerdos vigentes, aranceles y requisitos principales.</p>
+    <h3>Sectores de oportunidad</h3>
+    <p>Tres a cinco sectores, con una línea sobre por qué cada uno.</p>
+    <h3>Instituciones clave</h3>
+    <p>Entidades que una empresa debe conocer: promoción de inversión, ministerios, cámaras.</p>
+    <h3>Últimas publicaciones sobre Panamá</h3>
+    <p>Aquí aparecen automáticamente las publicaciones de Perspectivas etiquetadas con este país.</p>
+    <div class="row"><a class="btn ghost" href="#perspectivas">‹ Volver a Perspectivas</a></div>
+  </div></div>
+</section>
+
+<!-- NOSOTROS -->
+<section class="page" id="p-nosotros" aria-label="Nosotros">
+  <div class="navy band"><div class="wrap">
+    <p class="eb">Nosotros</p>
+    <h1 class="h1">Una firma del corredor Canadá–América Latina</h1>
+    <p class="lead" style="margin-top:20px">Combinamos inteligencia de mercado, estrategia comercial y trabajo con actores públicos y privados.</p>
+  </div></div>
+  <div class="band"><div class="wrap about">
+    <div>
+      <p class="eb">Fundadora</p>
+      <h2 class="h2">Solange Quintero</h2>
+      <p class="lead">Ejecutiva y asesora estratégica con raíces en Panamá y trayectoria en Montreal. Fue Cónsul General de Panamá en Montreal, experiencia que le dio un conocimiento cercano de cómo funcionan las instituciones, los gremios y la cooperación entre Canadá y América Latina.</p>
+      <p class="lead" style="margin-top:16px">Suma más de 15 años en marketing; los últimos seis, dedicados al desarrollo de negocios y las relaciones institucionales en las Américas. Trabaja en español, inglés y francés.</p>
+      <p class="lead" style="margin-top:16px">Según cada mandato, la firma integra a especialistas de su red con más de 20 años de trayectoria en dirección empresarial, expansión internacional, inversiones y gestión de proyectos en América Latina.</p>
+    </div>
+    <div class="values">
+      <div><h3>Un solo interlocutor</h3><p>Coordinamos a cada actor del proyecto.</p></div>
+      <div><h3>Alcance claro</h3><p>Entregables, plazos y honorarios definidos desde el inicio.</p></div>
+      <div><h3>Compromisos medibles</h3><p>Nos comprometemos con lo que controlamos, no con decisiones de terceros.</p></div>
+      <div><h3>Tres idiomas</h3><p>Español, inglés y francés.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- CONTACTO -->
+<section class="page" id="p-contacto" aria-label="Contacto">
+  <div class="band"><div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px">
+    <div class="navy contact-panel" style="padding:clamp(28px,4vw,48px)">
+      <p class="eb">Contacto</p>
+      <h1 class="h2">Cuéntenos qué decisión necesita tomar</h1>
+      <p>Le responderemos en un plazo de 48 horas hábiles.</p>
+      <p style="margin-top:24px"><strong>Correo</strong><br><a href="mailto:solange.quintero@alhenaskat.com" target="_blank" rel="noopener">solange.quintero@alhenaskat.com</a></p>
+      <p style="margin-top:14px"><strong>LinkedIn</strong><br><a href="https://www.linkedin.com/in/solangequintero/" target="_blank" rel="noopener">linkedin.com/in/solangequintero</a></p>
+    </div>
+    <form class="cform" id="cform" novalidate>
+      <label>Nombre *<input id="f-n" autocomplete="given-name"></label>
+      <label>Apellido *<input id="f-a" autocomplete="family-name"></label>
+      <label class="full">Correo electrónico *<input id="f-c" type="email" autocomplete="email"></label>
+      <label>Empresa u organización<input autocomplete="organization"></label>
+      <label>Soy<select><option>Una empresa</option><option>Un inversionista</option><option>Una institución</option></select></label>
+      <label class="full">Motivo de contacto<select><option>Entrada a mercados y expansión</option><option>Alianzas y desarrollo de negocios</option><option>Relaciones institucionales</option><option>Misiones comerciales</option><option>Otra consulta</option></select></label>
+      <label class="full">Mensaje<textarea></textarea></label>
+      <div class="full"><button class="btn" type="submit">Enviar mensaje</button></div>
+      <p class="note full" id="csent" role="status"></p>
+    </form>
+  </div></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#inicio" style="color:var(--white);align-items:flex-start" aria-label="Alhena Skat Group, inicio">
+          <svg width="40" height="40" viewBox="-2 -2 104 104" aria-hidden="true"><path d="M0 100 L50 0 L100 100 L80 100 L40 20 M20 60 H60" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+          <span>Alhena Skat Group</span>
+        </a>
+        <p style="margin-top:16px;color:rgba(255,255,255,.86)">Desarrollo de negocios y relaciones institucionales en el corredor Canadá–América Latina.</p>
+      </div>
+      <div><h3>Firma</h3><ul><li><a href="#servicios">Servicios</a></li><li><a href="#sectores">Sectores</a></li><li><a href="#nosotros">Nosotros</a></li></ul></div>
+      <div><h3>Perspectivas</h3><ul><li><a href="#perspectivas">Todas</a></li><li><a href="#perspectivas">Análisis</a></li><li><a href="#perspectivas">Misiones y eventos</a></li><li><a href="#perspectivas">Fichas país</a></li></ul></div>
+      <div><h3>Contacto</h3><ul><li><a href="#contacto">Escríbanos</a></li><li><a href="https://www.linkedin.com/in/solangequintero/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 Alhena Skat Group</span><span>ES · EN · FR</span></div>
+  </div>
+</footer>
+
+<script>
+{
+  const posts = [
+    {tag:'Análisis', title:'Qué debe saber una empresa canadiense antes de entrar al mercado panameño', text:'Guía de formato: contexto, oportunidades por sector y primeros pasos recomendados.', img:'Foto propia o gráfico'},
+    {tag:'Misiones', title:'Misión comercial: empresas de [sector] de Quebec en Ciudad de Panamá', text:'Guía de formato: objetivo de la misión, agenda, participantes autorizados y resultados.', img:'Foto de la misión'},
+    {tag:'Eventos', title:'Participación en [foro] sobre comercio entre Canadá y América Latina', text:'Guía de formato: tema del panel, ideas clave y enlace al evento.', img:'Foto del evento'},
+    {tag:'Alianzas', title:'Nueva alianza con [firma] para acompañar a empresas en [mercado]', text:'Guía de formato: qué aporta cada parte y a quién beneficia. Solo con autorización de la contraparte.', img:'Logos de ambas partes'},
+    {tag:'Análisis', title:'Resumen del mes: comercio e inversión en el corredor', text:'Guía de formato: tres a cinco noticias del mes, cada una con su lectura y su fuente.', img:'Gráfico del mes'}
+  ];
+  const card = p => `<article class="card"><div class="ph">${p.img}</div><div class="body"><p class="meta"><span class="ex">Ejemplo</span><span class="tag">${p.tag}</span></p><h3>${p.title}</h3><p>${p.text}</p><a class="more" href="#articulo">Ver formato ›</a></div></article>`;
+  document.getElementById('latest').innerHTML = posts.slice(0,3).map(card).join('');
+  const tags = ['Todas','Análisis','Misiones','Eventos','Alianzas'];
+  const chips = document.getElementById('chips'), all = document.getElementById('all');
+  const filter = t => { all.innerHTML = posts.filter(p => t==='Todas' || p.tag===t).map(card).join(''); chips.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.t===t))); };
+  chips.innerHTML = tags.map(t => `<button class="chip" type="button" data-t="${t}" aria-pressed="false">${t}</button>`).join('');
+  chips.addEventListener('click', e => { const b = e.target.closest('button'); if (b) filter(b.dataset.t); });
+  filter('Todas');
+
+  const pages = ['inicio','servicios','sectores','perspectivas','articulo','ficha','nosotros','contacto'];
+  const nav = document.getElementById('nav'), menu = document.getElementById('menu');
+  const show = () => {
+    let h = location.hash.slice(1); if (h==='servicios-instituciones') h='servicios';
+    const cur = pages.includes(h) ? h : 'inicio';
+    pages.forEach(p => document.getElementById('p-'+p).classList.toggle('on', p===cur));
+    nav.querySelectorAll('a').forEach(a => a.classList.toggle('cur', a.getAttribute('href')==='#'+(['articulo','ficha'].includes(cur)?'perspectivas':cur) && !a.classList.contains('btn')));
+    nav.classList.remove('open'); menu.setAttribute('aria-expanded','false');
+    if (location.hash==='#servicios-instituciones') document.getElementById('servicios-instituciones').scrollIntoView(); else window.scrollTo(0,0);
+  };
+  addEventListener('hashchange', show); show();
+  const hdr=document.querySelector('header'); const onScroll=()=>hdr.classList.toggle('scrolled', scrollY>8); addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  menu.addEventListener('click', () => { const o = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', String(o)); });
+
+  const fonts={cg:'"Cormorant Garamond",Georgia,serif',lb:'"Libre Baskerville",Georgia,serif',ms:'Montserrat,sans-serif',al:'Alice,Georgia,serif'};
+  document.querySelector('.fopts').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.documentElement.style.setProperty('--hf',fonts[b.dataset.f]);document.querySelectorAll('.fopts button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+  document.querySelectorAll('form.nl').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); f.querySelector('.note').textContent = 'Vista previa: la suscripción se activará al publicar el sitio.'; }));
+  document.getElementById('cform').addEventListener('submit', e => { e.preventDefault(); const miss = ['f-n','f-a','f-c'].some(id => !document.getElementById(id).value.trim()); document.getElementById('csent').textContent = miss ? 'Complete los campos marcados con asterisco.' : 'Vista previa: este mensaje no se envió.'; });
+}
+</script>
+</body>
+</html>

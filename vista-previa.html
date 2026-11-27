@@ -13,7 +13,7 @@
    PICTURE: tipografía y bandas azul marino; espacios marcados para fotos propias.
    COLOUR and TYPE: un solo azul marino continuo #1E264C con blanco; pie azul; gris como color secundario. Títulos en serif (a elegir), texto en Montserrat.
    LAYOUT: menú fijo (Servicios · Sectores · Perspectivas · Nosotros · Contacto), páginas por ancla. */
-:root,:root[data-theme=light],:root[data-theme=dark]{color-scheme:light;--navy:#1E264C;--white:#FFFFFF;--ink:#000000;--line:rgba(30,38,76,.16);--soft:rgba(0,0,0,.72);--wash:rgba(30,38,76,.05)}
+:root,:root[data-theme=light],:root[data-theme=dark]{color-scheme:light;--navy:#1E264C;--white:#FFFFFF;--ink:#000000;--line:color-mix(in srgb,var(--navy) 16%,transparent);--soft:rgba(0,0,0,.72);--wash:color-mix(in srgb,var(--navy) 5%,transparent)}
 *{box-sizing:border-box;min-width:0}
 html{scroll-padding-top:90px}
 body{margin:0;background:var(--white);color:var(--ink);font:400 16px/1.7 Montserrat,system-ui,sans-serif;overflow-x:clip}
@@ -86,7 +86,7 @@ nav a.cur{border-color:var(--navy);color:var(--navy)}
 .sect p{font-size:14px;color:var(--soft)}
 .news{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
 .news form{display:flex;flex-wrap:wrap;gap:10px;flex:1 1 380px;max-width:520px}
-input,select,textarea{font:400 16px Montserrat,sans-serif;color:var(--ink);background:var(--white);border:1px solid rgba(30,38,76,.4);padding:11px 12px;min-height:46px;width:100%}
+input,select,textarea{font:400 16px Montserrat,sans-serif;color:var(--ink);background:var(--white);border:1px solid color-mix(in srgb,var(--navy) 40%,transparent);padding:11px 12px;min-height:46px;width:100%}
 .news input{flex:1 1 220px;width:auto}
 textarea{min-height:130px;resize:vertical}
 label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500}
@@ -174,6 +174,7 @@ footer{background:var(--ink)}
 .fopts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .fopts button{font:500 12px Montserrat,sans-serif;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:4px 10px;min-height:30px;cursor:pointer}
 .fopts button[aria-pressed=true]{background:var(--white);color:var(--ink)}
+.copts i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid rgba(255,255,255,.7)}
 @media(max-width:900px){nav{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.1)}}
 
 /* ---- Flujo tipo Looka (v3) ---- */
@@ -217,18 +218,18 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.14)}
 .wash h2,.wash h3,.wash .eb{color:var(--navy)!important}
 .wash .lead,.wash .note{color:var(--gray-ink)!important}
 .wash label{color:var(--navy)}
-.wash input{color:var(--navy);border-color:rgba(30,38,76,.4);background:var(--white)}
+.wash input{color:var(--navy);border-color:color-mix(in srgb,var(--navy) 40%,transparent);background:var(--white)}
 .wash .btn{background:var(--navy);color:var(--white)!important}
 .statement{background:var(--gray)}
 
 .photo.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.photo.img::before{z-index:1;background:linear-gradient(0deg,rgba(30,38,76,.35),transparent 40%)}
+.photo.img::before{z-index:1;background:linear-gradient(0deg,color-mix(in srgb,var(--navy) 35%,transparent),transparent 40%)}
 .photo.img figcaption{z-index:2;font-size:11px;color:rgba(255,255,255,.75)}
 @media(prefers-reduced-motion:no-preference){.photo.img img{animation:kb 22s ease-in-out infinite alternate}@keyframes kb{to{transform:scale(1.07)}}.photo.img::before{animation:none}}
 </style>
 </head>
 <body>
-<div class="preview" role="group" aria-label="Opciones de la vista previa"><span>Vista previa · «Ejemplo» = guía de formato</span><span class="fopts">Títulos: <button type="button" data-f="cg" aria-pressed="true">Cormorant Garamond</button><button type="button" data-f="lb" aria-pressed="false">Libre Baskerville</button><button type="button" data-f="al" aria-pressed="false">Alice (Looka)</button><button type="button" data-f="ms" aria-pressed="false">Montserrat</button></span></div>
+<div class="preview" role="group" aria-label="Opciones de la vista previa"><span>Vista previa · «Ejemplo» = guía de formato</span><span class="fopts">Títulos: <button type="button" data-f="cg" aria-pressed="true">Cormorant Garamond</button><button type="button" data-f="lb" aria-pressed="false">Libre Baskerville</button><button type="button" data-f="al" aria-pressed="false">Alice (Looka)</button><button type="button" data-f="ms" aria-pressed="false">Montserrat</button></span><span class="fopts copts">Azul: <button type="button" data-c="#1E264C" aria-pressed="true"><i style="background:#1E264C"></i>Actual</button><button type="button" data-c="#001489" aria-pressed="false"><i style="background:#001489"></i>Reflex Blue C</button><button type="button" data-c="#10069F" aria-pressed="false"><i style="background:#10069F"></i>Blue 072 C</button><button type="button" data-c="#281E78" aria-pressed="false"><i style="background:#281E78"></i>2372 C</button></span></div>
 <header>
   <div class="wrap bar">
     <a class="logo" href="#inicio" aria-label="Alhena Skat Group, inicio">
@@ -525,7 +526,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.14)}
   menu.addEventListener('click', () => { const o = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', String(o)); });
 
   const fonts={cg:'"Cormorant Garamond",Georgia,serif',lb:'"Libre Baskerville",Georgia,serif',ms:'Montserrat,sans-serif',al:'Alice,Georgia,serif'};
-  document.querySelector('.fopts').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.documentElement.style.setProperty('--hf',fonts[b.dataset.f]);document.querySelectorAll('.fopts button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+  document.querySelector('.fopts:not(.copts)').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.documentElement.style.setProperty('--hf',fonts[b.dataset.f]);document.querySelectorAll('.fopts:not(.copts) button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+  document.querySelector('.copts').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.documentElement.style.setProperty('--navy',b.dataset.c);document.querySelectorAll('.copts button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
   document.querySelectorAll('form.nl').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); f.querySelector('.note').textContent = 'Vista previa: la suscripción se activará al publicar el sitio.'; }));
   document.getElementById('cform').addEventListener('submit', e => { e.preventDefault(); const miss = ['f-n','f-a','f-c'].some(id => !document.getElementById(id).value.trim()); document.getElementById('csent').textContent = miss ? 'Complete los campos marcados con asterisco.' : 'Vista previa: este mensaje no se envió.'; });
 }
